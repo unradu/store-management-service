@@ -51,11 +51,11 @@ public class Product {
     @LastModifiedDate
     private Instant modifiedAt;
 
-    @Column(name = "created_by", nullable = false, length = 64)
+    @Column(name = "created_by", nullable = false, length = 64, updatable = false)
     @CreatedBy
     private String createdBy;
 
-    @Column(name = "modified_by", length = 64)
+    @Column(name = "modified_by", length = 64, updatable = false)
     @LastModifiedBy
     private String modifiedBy;
 }
