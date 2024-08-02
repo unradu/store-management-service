@@ -7,12 +7,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: rootpw
       MYSQL_DATABASE: storedb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpw
     ports:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
 
 volumes:
   mysql_data:
