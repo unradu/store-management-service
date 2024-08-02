@@ -3,6 +3,7 @@ package com.demo.store.api;
 import com.demo.store.dto.AddProductDTO;
 import com.demo.store.dto.AddProductResultDTO;
 import com.demo.store.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/products")
+@SecurityRequirement(name = "basicAuth")
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;

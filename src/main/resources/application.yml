@@ -9,3 +9,12 @@ spring:
     user: flyway_user
     password: flywaypw
     locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
