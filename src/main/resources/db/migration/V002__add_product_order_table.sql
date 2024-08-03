@@ -1,0 +1,13 @@
+CREATE TABLE product_order (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    product_id INT UNSIGNED NOT NULL,
+    buyer_email VARCHAR(254) NOT NULL,
+    quantity INT NOT NULL CHECK (quantity > 0),
+    cost DECIMAL(10, 2) NOT NULL CHECK (cost >= 0),
+    version INT UNSIGNED NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_by VARCHAR(64) NOT NULL,
+    modified_by VARCHAR(64) DEFAULT NULL,
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);

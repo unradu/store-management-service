@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,12 +32,14 @@ public class ProductController {
     private final ProductRetrievalService productRetrievalService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductResultDTO> addProduct(@Valid @RequestBody AddProductDTO addProductDTO) {
         ProductResultDTO resultDTO = productLifecycleService.addProduct(addProductDTO);
         return ResponseEntity.ok(resultDTO);
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'SALES_ASSOCIATE')")
     public ResponseEntity<PagedModel<ProductResultDTO>> getAllProducts(
                                                                     @RequestParam(required = false) ProductState state,
                                                                     @RequestParam(defaultValue = "0") int pageNumber,
@@ -46,12 +49,14 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'SALES_ASSOCIATE')")
     public ResponseEntity<ProductResultDTO> getProduct(@PathVariable Long productId) {
         ProductResultDTO productResultDTO = productRetrievalService.getProduct(productId);
         return ResponseEntity.ok(productResultDTO);
     }
 
     @PutMapping("/{productId}/price")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProductResultDTO> changePrice(@PathVariable Long productId,
                                                         @Valid @RequestBody ProductPriceChangeDTO productPriceChangeDTO) {
         ProductResultDTO productResultDTO = productPricingService.changePrice(productId, productPriceChangeDTO);
@@ -59,6 +64,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{productId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> removeProduct(@PathVariable Long productId) {
         productLifecycleService.removeProduct(productId);
         return ResponseEntity.noContent().build();
