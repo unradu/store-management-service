@@ -1,6 +1,5 @@
 package com.demo.store.dto;
 
-import com.demo.store.model.CurrencyEnum;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -24,9 +23,6 @@ public class AddProductDTO {
     @Positive
     @Digits(integer = 8, fraction = 2)
     private BigDecimal price;
-
-    @NotNull
-    private CurrencyEnum currency;
 
     @NotNull
     @PositiveOrZero

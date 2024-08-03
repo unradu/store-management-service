@@ -1,5 +1,8 @@
 package com.demo.store.exception;
 
+import com.demo.store.exception.custom.BusinessException;
+import com.demo.store.exception.custom.PropertyConflictException;
+import com.demo.store.exception.custom.ResourceNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -29,6 +32,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public final ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return createErrorDetailsResponse("Invalid Request Body", HttpStatus.BAD_REQUEST, ex.getLocalizedMessage());
+    }
+
+    @ExceptionHandler(PropertyConflictException.class)
+    public final ResponseEntity<Object> handlePropertyConflictException(PropertyConflictException ex) {
+        return createErrorDetailsResponse("Conflicting property value", HttpStatus.CONFLICT, ex.getMessage());
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public final ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
+        return createErrorDetailsResponse("Resource not found", HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public final ResponseEntity<Object> handleBusinessException(BusinessException ex) {
+        return createErrorDetailsResponse("Business error", HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     private static ResponseEntity<Object> createErrorDetailsResponse(String title, HttpStatus httpStatus,
