@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/testdb
+    username: testuser
+    password: testpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    url: jdbc:mysql://localhost:3307/testdb
+    user: testuser
+    password: testpassword
+    locations: classpath:db/migration, classpath:db/test-data-migration
+
+test:
+  users:
+    admin:
+      username: admin
+      password: password
+    salesAssociate:
+      username: salesUser
+      password: password
+
