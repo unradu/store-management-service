@@ -28,7 +28,7 @@ class OrderControllerIT extends BaseIT {
 	@Autowired
 	private MockMvc mockMvc;
 
-	private ObjectMapper objectMapper = new ObjectMapper();
+	private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Test
 	void generateOrder_success() throws Exception {

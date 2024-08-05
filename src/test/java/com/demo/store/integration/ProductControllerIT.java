@@ -1,6 +1,5 @@
 package com.demo.store.integration;
 
-import com.demo.store.dto.GenerateOrderDTO;
 import com.demo.store.dto.ProductResultDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +31,7 @@ class ProductControllerIT extends BaseIT {
     @Autowired
     private MockMvc mockMvc;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
     void getProduct_success() throws Exception {
