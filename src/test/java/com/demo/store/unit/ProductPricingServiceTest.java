@@ -36,18 +36,16 @@ class ProductPricingServiceTest {
     @InjectMocks
     private ProductPricingService productPricingService;
 
-    private Product existingProduct;
+    private final Product existingProduct = new Product();
 
     @BeforeEach
     void setUpExistingProduct() {
-        existingProduct = Product.builder()
-                .id(1L)
-                .price(new BigDecimal("50.00"))
-                .name("test product")
-                .description("some description...")
-                .quantity(10)
-                .state(ProductState.AVAILABLE)
-                .build();
+        existingProduct.setId(1L);
+        existingProduct.setPrice(new BigDecimal("50.00"));
+        existingProduct.setName("test product");
+        existingProduct.setDescription("some description...");
+        existingProduct.setQuantity(10);
+        existingProduct.setState(ProductState.AVAILABLE);
     }
 
     @Test
